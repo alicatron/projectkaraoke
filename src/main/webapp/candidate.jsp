@@ -11,14 +11,15 @@
 <body>
 	<table>
 	<tr>
-		<th>Id</th><th>Role</th><th>Practice</th><th># of positions</th>
+		<th>Fname</th><th>Sname</th><th>Email</th><th>Start Date</th>
 	</tr>
-	<c:if test="${not empty vacancies}">
-		<c:forEach var="listValue" items="${vacancies}">
+	<c:if test="${not empty candidates}">
+		<c:forEach var="listValue" items="${candidates}">
 			<tr>
-				<td>${listValue.role}</td>
-				<td>${listValue.practice}</td>
-				<td>${listValue.numOfPositions}</td>
+				<td>${listValue.firstName}</td>
+				<td>${listValue.lastName}</td>
+				<td>${listValue.email}</td>
+				<td>${listValue.startDate}</td>
 			</tr>
 		</c:forEach>
 	</c:if>
