@@ -5,9 +5,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Vacancy</title>
+<title>Candidates</title>
 </head>
-<h2>Vacancy</h2>
+<h2>Candidates</h2>
 <body>
 	<table>
 	<tr>

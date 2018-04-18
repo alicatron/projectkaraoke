@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import project.business.Candidate;
-import project.business.Vacancy;
 import project.dao.CandidateData;
 
 @Service

@@ -11,7 +11,7 @@
 <body>
 	<table>
 	<tr>
-		<th>Id</th><th>Role</th><th>Practice</th><th># of positions</th>
+		<th>Role</th><th>Practice</th><th># of positions</th>
 	</tr>
 	<c:if test="${not empty vacancies}">
 		<c:forEach var="listValue" items="${vacancies}">

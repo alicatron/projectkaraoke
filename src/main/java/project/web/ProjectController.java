@@ -16,6 +16,9 @@ public class ProjectController {
 	
 	@Autowired
 	CandidateOperation COData;
+	
+	@Autowired
+	RecruiterOperation ROData;
 
 	@RequestMapping("/")
 	public String welcome() {
@@ -36,10 +39,21 @@ public class ProjectController {
 		
 	}
 	
-	@RequestMapping("/recruiter")
+	/*@RequestMapping("/recruiter")
 	public String Recruiter() {
 		return "recruiter";
+	}*/
+	
+	@RequestMapping("/recruiter")
+	public ModelAndView recruiter(){
+		ModelAndView result = new ModelAndView();
+		List<Recruiter> recruiters = ROData.getRecruiters();
+		result.addObject("recruiters",recruiters);
+		result.setViewName("recruiter");
+		return result;
+		
 	}
+	
 	
 //	@RequestMapping("/candidate")
 //	public String Candidate() {
