@@ -1,5 +1,7 @@
 package project.web;
 
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.ChartUtilities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,7 +9,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 import project.business.*;
+
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class ProjectController {
@@ -82,6 +89,15 @@ public class ProjectController {
 		
 	}
 	
-	
-	
+	@RequestMapping("/createChart")
+	public void createChart(HttpServletResponse response) {
+		response.setContentType("image/jpeg");
+		try{
+			OutputStream out = response.getOutputStream();
+			ChartUtilities.writeChartAsJPEG(out, CreateChart.createPieChart(), 640, 480);
+		}
+		catch(IOException e){
+			System.out.println(e.getMessage());
+		}
+	}
 }

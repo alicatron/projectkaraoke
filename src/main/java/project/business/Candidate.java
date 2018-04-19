@@ -9,6 +9,21 @@ public class Candidate {
 	private String LastName;
 	private String Email;
 	private Date StartDate;
+	private int RecruiterId;
+	private int VacancyId;
+	
+	public int getRecruiterId() {
+		return RecruiterId;
+	}
+	public void setRecruiterId(int recruiterId) {
+		RecruiterId = recruiterId;
+	}
+	public int getVacancyId() {
+		return VacancyId;
+	}
+	public void setVacancyId(int vacancyId) {
+		VacancyId = vacancyId;
+	}
 	public int getId() {
 		return id;
 	}
@@ -39,12 +54,18 @@ public class Candidate {
 	public void setStartDate(Date startDate) {
 		StartDate = startDate;
 	}
-	public Candidate(String firstName, String lastName, String email, Date startDate) {
+	public Candidate(String firstName, String lastName, String email, Date startDate, int recruiterId, int vacacnyId) {
 		super();
 		FirstName = firstName;
 		LastName = lastName;
 		Email = email;
 		StartDate = startDate;
+		RecruiterId = recruiterId;
+		VacancyId = vacacnyId;
+	}
+	//default constructor
+	public Candidate(){
+		
 	}
 	
 	
