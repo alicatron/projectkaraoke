@@ -19,10 +19,23 @@ public class ProjectController {
 	
 	@Autowired
 	RecruiterOperation ROData;
+	
+	@Autowired
+	WhiteBoardOperation WBData;
 
+//	@RequestMapping("/")
+//	public String welcome() {
+//		return "index";
+//	}
+	
 	@RequestMapping("/")
-	public String welcome() {
-		return "index";
+	public ModelAndView welcome(){
+		ModelAndView result = new ModelAndView();
+		List<WhiteBoard> whiteboardFigures = WBData.getProducts();
+		result.addObject("whiteboardFigures",whiteboardFigures);
+		result.setViewName("index");
+		return result;
+		
 	}
 	
 	//@RequestMapping("/vacancy")

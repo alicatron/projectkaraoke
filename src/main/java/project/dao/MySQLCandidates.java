@@ -25,7 +25,7 @@ public class MySQLCandidates implements CandidateData {
 			
 			while(rs.next()){
 				
-				candidates.add(new Candidate(rs.getString(2),rs.getString(3),rs.getString(4),rs.getDate(7)));
+				candidates.add(new Candidate(rs.getString(3),rs.getString(2),rs.getString(4),rs.getDate(7)));
 			}
 			cn.close();
 		}catch(SQLException ex){
