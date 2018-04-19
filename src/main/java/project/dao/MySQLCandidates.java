@@ -25,14 +25,14 @@ public class MySQLCandidates implements CandidateData {
 			
 			while(rs.next()){
 				
-				candidates.add(new Candidate(rs.getString(3),rs.getString(2),rs.getString(4),rs.getDate(7)));
+				candidates.add(new Candidate(rs.getString(3),rs.getString(2),rs.getString(4),rs.getDate(7),rs.getInt(5),rs.getInt(6)));
 			}
 			cn.close();
 		}catch(SQLException ex){
-			candidates.add(new Candidate(ex.getMessage(),ex.getMessage(), ex.getMessage(),null));
+			candidates.add(new Candidate(ex.getMessage(),ex.getMessage(), ex.getMessage(),null,1,1));
 		} catch (ClassNotFoundException ex) {
 			// TODO Auto-generated catch block
-			candidates.add(new Candidate("Driver" + ex.getMessage(),null,null, null));
+			candidates.add(new Candidate("Driver" + ex.getMessage(),null,null, null,1,1));
 		}
 
 	return candidates;

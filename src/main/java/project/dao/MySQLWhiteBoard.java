@@ -32,13 +32,13 @@ public class MySQLWhiteBoard implements WhiteBoardData {
 				while(rs.next()){
 					
 					//vacancies.add(new Vacancy(rs.getString(2),rs.getString(3),rs.getInt(4)));
-					whiteboardFigures.add(new WhiteBoard(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDate(4), rs.getString("hiredBy"),rs.getString(6)));
+					whiteboardFigures.add(new WhiteBoard(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDate(4), rs.getString("hiredBy"),rs.getString(6),1,1));
 				}
 		   }catch(SQLException ex){
-				whiteboardFigures.add(new WhiteBoard(ex.getMessage(),null, null,null,null,null));
+				whiteboardFigures.add(new WhiteBoard(ex.getMessage(),null, null,null,null,null,1,1));
 		   } 
 		   catch (ClassNotFoundException ex) {
-			   whiteboardFigures.add(new WhiteBoard("Driver"+ ex.getMessage(),null, null,null,null,null));
+			   whiteboardFigures.add(new WhiteBoard("Driver"+ ex.getMessage(),null, null,null,null,null,1,1));
 				
 			}
 		return whiteboardFigures;

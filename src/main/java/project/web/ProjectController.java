@@ -2,12 +2,19 @@ package project.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 
 import project.business.*;
 import java.util.List;
+import project.dao.MySQLAddCandidate;
+
+import javax.validation.Valid;
 
 @Controller
 public class ProjectController {
@@ -82,6 +89,25 @@ public class ProjectController {
 		
 	}
 	
+	 @RequestMapping(value = "/addCandidate", method = RequestMethod.GET)
+	    public ModelAndView add() {
+	     ModelAndView result = new ModelAndView();
+		 result.addObject("candidate", new Candidate());
+		 result.setViewName("addCandidate");
+	     return result;
+	    }
+
+	    @RequestMapping(value = "/addCandidate", method = RequestMethod.POST)
+	    public ModelAndView processAdd(@Valid @ModelAttribute("candidate") Candidate candidate, BindingResult bindingResult) {
+	        if (bindingResult.hasErrors()) {
+	            return add();
+	        }
+	        //System.out.println("CANDIDATE " + candidate.getLastName());
+	        MySQLAddCandidate AddCandidate = new MySQLAddCandidate(candidate);
+	        //System.out.println(AddCandidate.toString());
+	        
+	        return candidate();
+	    }
 	
 	
 }
