@@ -2,6 +2,11 @@
     pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -47,33 +52,65 @@
                     <td><form:label path="startDate">Start Date</form:label></td>
                     <td><form:input type="date" path="startDate"/></td>
                 </tr>
-                <tr>
+                <!--<tr>
                     <td><form:label path="recruiterId">Recruiter</form:label></td>
                     <td><form:input path="recruiterId"/></td>
                 </tr>
                 <tr>
                     <td><form:label path="vacancyId">Vacancy</form:label></td>
                     <td><form:input path="vacancyId"/></td>
-                </tr>
-                <!--<tr>
-                 <td><form:label path="recruiterId">Recruiter</form:label>
-                <select name="recruiterid">
-					<c:forEach var="listValue" items="${recruiters}">
-					<option value="${listValue.id}">${listValue.email}</option>
-					</c:forEach>
-				</select>
+                </tr>-->
+                
+                <%
+		String driverName = "com.mysql.jdbc.Driver";
+		String connectionUrl = "jdbc:mysql://localhost:3306/karaoke?useSSL=false";
+		String userId = "root";
+		String password = "c0nygre";
+			
+		Connection connection = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		ResultSet resultSet2 = null;
+
+		
+		connection = DriverManager.getConnection(
+		connectionUrl, userId, password);
+		statement = connection.createStatement();
+		String sql = "SELECT RecruiterID, Email FROM recruiter;";
+		resultSet = statement.executeQuery(sql);
+		%>
+                <tr>
+                 <td><form:label path="recruiterId">Recruiter</form:label></td>
+                <td><form:select path="recruiterId">
+					<%
+						while(resultSet.next()){
+							System.out.println("WORKS " + resultSet.getInt(1));
+							out.print("<option value=" + resultSet.getInt(1) + ">" + 
+							resultSet.getString(2) + "</option>");
+						}				
+					%>
+				</form:select></td>
 				</tr>
-				<select name="recruiterid">
-					<c:forEach var="listValue" items="${recruiters}">
-					<option value="${listValue.id}">${listValue.email}</option>
-					</c:forEach>
-				</select>
+				<tr>
+                 <td><form:label path="vacancyId">Vacancy</form:label></td>
+                <td><form:select path="vacancyId">
+					<%
+						String sql2 = "SELECT VacancyID, Role From vacancy;";
+						resultSet2 = statement.executeQuery(sql2);
+						while(resultSet2.next()){
+							out.print("<option value=" + resultSet2.getInt(1) + ">" + 
+							resultSet2.getString(2) + "</option>");
+						}				
+					%>
+				</form:select></td>
+				</tr>
+				
                
                 <tr>
                     <td><input type="submit" value="Submit"/></td>
-                </tr>-->
+                </tr>
             </table>
-    <form:button id="addCandidate">Add Person</form:button>
+    <!--<form:button id="addCandidate">Add Person</form:button>
     </form:form>
 	<!--<a href="/addCandidate">Add candidate</a>-->
 	<a href="/">Home</a>
