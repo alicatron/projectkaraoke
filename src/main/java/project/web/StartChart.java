@@ -11,45 +11,38 @@ import java.sql.SQLException;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.category.CategoryDataset;
-import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 
-
-public class CreateChart{
+public class StartChart{
 	
-	public static JFreeChart createBarChart(){
+	public static JFreeChart createPieChart(){
 		Connection cn;
 		JFreeChart chart = null;
-		
 		try{
-			DefaultCategoryDataset dataset = new DefaultCategoryDataset( );
+			DefaultPieDataset dataset = new DefaultPieDataset( );
 			Class.forName("com.mysql.jdbc.Driver");
 			cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/karaoke?useSSL=false",
 					"root","c0nygre");
-			PreparedStatement st = cn.prepareStatement("SELECT r.email as 'Recruiter', COUNT(*) as 'Number of Hires' "
-					+ "FROM recruiter r JOIN candidate c WHERE r.recruiterid = c.recruiterid "
-					+ "GROUP BY r.email");
+			PreparedStatement st = cn.prepareStatement("select startDate, count(*) as 'Number of Starters'  "
+					+ "from candidate where startDate = StartDate "
+					+ "GROUP BY startDate");
 			ResultSet rs = st.executeQuery();
 			while(rs.next()){ 
-				dataset.addValue(new Double(rs.getDouble(2)), rs.getString(1), " " );
-				
+				dataset.setValue(rs.getDate(1), new Double( rs.getDouble(2) ) );
 			}
 			
-			chart = ChartFactory.createBarChart(
-					"Hire Count", // chart title
-					"Recruiter" ,
-					"Number Of Hires",
-					dataset,
-					PlotOrientation.VERTICAL,
-			        true,true,false);
+			
+			chart = ChartFactory.createPieChart(
+					"Start Date Chart", // chart title
+					dataset,          // data
+					true,             // include legend
+					true,
+					false);
 			cn.close();
-			
-			
 			int width = 640;   
 			int height = 480;  
-			File BarChart = new File( "numberhires.jpeg" ); 
-			ChartUtilities.saveChartAsJPEG( BarChart, chart, width , height );
+			File pieChart = new File( "start_date.jpeg" ); 
+			ChartUtilities.saveChartAsJPEG( pieChart , chart , width , height );
 			return chart;
 		}
 		catch (ClassNotFoundException ex) {
@@ -64,4 +57,3 @@ public class CreateChart{
 		return chart;
 	}
 }
-

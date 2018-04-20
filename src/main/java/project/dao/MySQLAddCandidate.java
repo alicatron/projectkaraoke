@@ -55,7 +55,7 @@ public class MySQLAddCandidate {
         		nov = ((Number) rs.getObject(1)).intValue();
             System.out.println("positions count " + nov);
             nov = nov - 1;
-            System.out.println("new pocition count " + nov);
+            System.out.println("new position count " + nov);
         	
             st.executeUpdate("UPDATE vacancy SET NumOfPositions = " + nov + " WHERE VacancyID = " +candidate.getVacancyId()+";");
         	}

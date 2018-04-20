@@ -55,8 +55,8 @@ public class ProjectController {
 	
 	//@RequestMapping("/vacancy")
 //	public String vacancy() {
-//		return "vacancy";
-//	}
+//		return "vacancy";}
+	
 	@RequestMapping("/vacancy")
 	public ModelAndView vacancy(){
 		ModelAndView result = new ModelAndView();
@@ -102,12 +102,50 @@ public class ProjectController {
 		response.setContentType("image/jpeg");
 		try{
 			OutputStream out = response.getOutputStream();
-			ChartUtilities.writeChartAsJPEG(out, CreateChart.createPieChart(), 640, 480);
+			ChartUtilities.writeChartAsJPEG(out, CreateChart.createBarChart(), 640, 480);
 		}
 		catch(IOException e){
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	@RequestMapping("/startDateChart")
+	public void startChart(HttpServletResponse response) {
+		response.setContentType("image/jpeg");
+		try{
+			OutputStream out = response.getOutputStream();
+			ChartUtilities.writeChartAsJPEG(out, StartChart.createPieChart(), 640, 480);
+		}
+		catch(IOException e){
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	@RequestMapping("/roleChart")
+	public void roleChart(HttpServletResponse response) {
+		response.setContentType("image/jpeg");
+		try{
+			OutputStream out = response.getOutputStream();
+			ChartUtilities.writeChartAsJPEG(out, RoleChart.createBarChart(), 640, 480);
+		}
+		catch(IOException e){
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	@RequestMapping("/positionCountChart")
+	public void positionCountChart(HttpServletResponse response) {
+		response.setContentType("image/jpeg");
+		try{
+			OutputStream out = response.getOutputStream();
+			ChartUtilities.writeChartAsJPEG(out, PositionCountChart.createBarChart(), 640, 480);
+		}
+		catch(IOException e){
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	
 	 @RequestMapping(value = "/addCandidate", method = RequestMethod.GET)
 	    public ModelAndView add() {
 	     ModelAndView result = new ModelAndView();
