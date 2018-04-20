@@ -1,5 +1,7 @@
 package project.web;
 
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.ChartUtilities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +14,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 import project.business.*;
+
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 import project.dao.MySQLAddCandidate;
 import project.dao.MySQLAddVacancy;
 import project.dao.MySQLAddRecruiter;
@@ -21,6 +28,7 @@ import project.dao.MySQLRecruiterHires;
 
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.validation.Valid;
+
 
 @Controller
 public class ProjectController {
@@ -118,6 +126,17 @@ public class ProjectController {
 		
 	}
 	
+	@RequestMapping("/createChart")
+	public void createChart(HttpServletResponse response) {
+		response.setContentType("image/jpeg");
+		try{
+			OutputStream out = response.getOutputStream();
+			ChartUtilities.writeChartAsJPEG(out, CreateChart.createPieChart(), 640, 480);
+		}
+		catch(IOException e){
+			System.out.println(e.getMessage());
+		}
+	}
 	 @RequestMapping(value = "/addCandidate", method = RequestMethod.GET)
 	    public ModelAndView add() {
 	     ModelAndView result = new ModelAndView();
