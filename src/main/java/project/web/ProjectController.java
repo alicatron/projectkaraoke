@@ -116,15 +116,28 @@ public class ProjectController {
 		
 	}
 	
-	@RequestMapping("/candidate")
+	@RequestMapping(value="/candidate", method = RequestMethod.GET)
 	public ModelAndView candidate(){
 		ModelAndView result = new ModelAndView();
 		List<Candidate> candidates = COData.getProducts();
 		result.addObject("candidates",candidates);
+		result.addObject("candidate", new Candidate());
 		result.setViewName("candidate");
 		return result;
 		
 	}
+	@RequestMapping(value="/candidate", method = RequestMethod.POST)
+	public ModelAndView addCandidate(@Valid @ModelAttribute("candidate") Candidate candidate, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return add();
+        }
+        //System.out.println("CANDIDATE " + candidate.getLastName());
+        MySQLAddCandidate AddCandidate = new MySQLAddCandidate(candidate);
+        //System.out.println(AddCandidate.toString());
+        
+        return candidate();
+    }
+	
 	
 	@RequestMapping("/createChart")
 	public void createChart(HttpServletResponse response) {
