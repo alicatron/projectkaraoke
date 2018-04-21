@@ -9,7 +9,7 @@ public class MySQLAddCandidate {
 	public static boolean success;
 	
 	public MySQLAddCandidate(@Valid Candidate candidate) {
-		System.out.println("Constructor of query hit" + candidate.getEmail());
+		System.out.println("Constructor of query hit" + candidate.getEmail() +" RECID"+ candidate.getRecruiterId()+ " VACID " + candidate.getVacancyId());
 		
 		String jdbcDriver = "com.mysql.jdbc.Driver";
         String databaseUri = "jdbc:mysql://localhost:3306/karaoke?autoReconnect=true&useSSL=false";

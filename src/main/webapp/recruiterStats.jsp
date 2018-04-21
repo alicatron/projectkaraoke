@@ -76,7 +76,7 @@
 		connection = DriverManager.getConnection(
 		connectionUrl, userId, password);
 		statement = connection.createStatement();
-		String sql = "SELECT FirstName, LastName FROM recruiter WHERE RecruiterID = " + request.getParameter("recruiterid") + ";";
+		String sql = "SELECT FirstName, LastName FROM recruiter WHERE RecruiterID =" + request.getParameter("recruiterid") + ";";
 		resultSet = statement.executeQuery(sql);
 		
 		while (resultSet.next()) {

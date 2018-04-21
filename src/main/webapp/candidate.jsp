@@ -2,6 +2,11 @@
     pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+
 
 <!DOCTYPE html>
 <html>
@@ -106,6 +111,7 @@
 	 
  
 <form:form action="${actionUrl}" modelAttribute="candidate" method="POST" acceptCharset="UTF-8">
+<<<<<<< HEAD
        
         <div class="form-group row">
     <form:label path="firstName" for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">First Name</form:label>
@@ -158,16 +164,98 @@
 					<option value="${listValue.id}">${listValue.email}</option>
 					</c:forEach>
 				</select>
+=======
+        <table>
+                <tr>
+                    <td><form:label path="lastName">LastName</form:label></td>
+                    <td><form:input path="lastName"/></td>
+                </tr>
+                <tr>
+                    <td><form:label path="firstName">FirstName</form:label></td>
+                    <td><form:input path="firstName"/></td>
+                </tr>
+                <tr>
+                    <td><form:label path="email">Email</form:label></td>
+                    <td><form:input path="email"/></td>
+                </tr>
+                <tr>
+                    <td><form:label path="startDate">Start Date</form:label></td>
+                    <td><form:input type="date" path="startDate"/></td>
+                </tr>
+                <!--<tr>
+                    <td><form:label path="recruiterId">Recruiter</form:label></td>
+                    <td><form:input path="recruiterId"/></td>
+                </tr>
+                <tr>
+                    <td><form:label path="vacancyId">Vacancy</form:label></td>
+                    <td><form:input path="vacancyId"/></td>
+                </tr>-->
+                
+                <%
+		String driverName = "com.mysql.jdbc.Driver";
+		String connectionUrl = "jdbc:mysql://localhost:3306/karaoke?useSSL=false";
+		String userId = "root";
+		String password = "c0nygre";
+			
+		Connection connection = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+		ResultSet resultSet2 = null;
+
+		
+		connection = DriverManager.getConnection(
+		connectionUrl, userId, password);
+		statement = connection.createStatement();
+		String sql = "SELECT RecruiterID, Email FROM recruiter;";
+		resultSet = statement.executeQuery(sql);
+		%>
+                <tr>
+                 <td><form:label path="recruiterId">Recruiter</form:label></td>
+                <td><form:select path="recruiterId">
+					<%
+						while(resultSet.next()){
+							System.out.println("WORKS " + resultSet.getInt(1));
+							out.print("<option value=" + resultSet.getInt(1) + ">" + 
+							resultSet.getString(2) + "</option>");
+						}				
+					%>
+				</form:select></td>
+>>>>>>> branch 'master' of https://github.com/alicatron/projectkaraoke.git
 				</tr>
+<<<<<<< HEAD
 				<select name="recruiterid">
 					<c:forEach var="listValue" items="${recruiters}">
 					<option value="${listValue.id}">${listValue.email}</option>
 					</c:forEach>
 				</select> -->
 
+=======
+				<tr>
+                 <td><form:label path="vacancyId">Vacancy</form:label></td>
+                <td><form:select path="vacancyId">
+					<%
+						String sql2 = "SELECT VacancyID, Role From vacancy;";
+						resultSet2 = statement.executeQuery(sql2);
+						while(resultSet2.next()){
+							out.print("<option value=" + resultSet2.getInt(1) + ">" + 
+							resultSet2.getString(2) + "</option>");
+						}				
+					%>
+				</form:select></td>
+				</tr>
+				
+>>>>>>> branch 'master' of https://github.com/alicatron/projectkaraoke.git
                
+<<<<<<< HEAD
             
     <form:button id="candidate" class="btn btn-info">Add Candidate</form:button>
+=======
+                <tr>
+                    <td><input type="submit" value="Submit"/></td>
+                </tr>
+            </table>
+    <!--<form:button id="addCandidate">Add Person</form:button>
+>>>>>>> branch 'master' of https://github.com/alicatron/projectkaraoke.git
     </form:form>
     </div>
 
