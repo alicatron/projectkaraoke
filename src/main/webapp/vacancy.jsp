@@ -1,37 +1,80 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
 <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"
         rel="stylesheet">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+ <link href="resources/navbar.css" rel="stylesheet">
 <title>Vacancy</title>
 </head>
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">White Board</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="/">Home</a></li>
-      <li><a href="/vacancy">Vacancies</a></li>
-      <li><a href="/candidate">Hired Candidates</a></li>
-      <li><a href="recruiter">Recruiters</a></li>
-    </ul>
-  </div>
-</nav>
-
 <body>
 
+<div class="container">
+ 
+      <!-- Static navbar -->
+      <nav class="navbar navbar-inverse">
+      
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">WhiteBoard</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            
+            <ul class="nav navbar-nav navbar-right">
+              <li class="active"><a href="/">Home</a></li>
+              <li class="active"><a href="/vacancy">Vacancies</a></li>
+      <li><a href="/candidate">Hired Candidates</a></li>
+      <li><a href="recruiter">Recruiters</a></li>
+      <li><a href="/charts">Charts</a></li>
+      </ul>
+      <ul class="dropdown-menu">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li class="dropdown-header">Nav header</li>
+                  <li><a href="#">Separated link</a></li>
+                  <li><a href="#">One more separated link</a></li>
+                </ul>
+              </li>
+            </ul>
+            
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
+    </div> <!-- /container -->
+
+<div class= "container">
+<div style = "float: right;">
+<a href="/vacancyChart"><button id="vacancy" class="btn btn-info"> View Graph <span class="glyphicon glyphicon-stats"></span></button></a>
+</div>
+</div>
+
 	<div class="container">
+	
         <table class="table table-striped">
-            <thead>
+        
+            <thead class="p-3 mb-2 bg-primary text-white">
+           
 	<tr>
 		<th>Role</th>
 		<th>Practice</th>
 		<th>Number of Positions</th>
+		<th></th>
+		<th></th>
 	</tr>
 	</thead>
 	<tbody>
@@ -41,20 +84,45 @@
 				<td>${listValue.role}</td>
 				<td>${listValue.practice}</td>
 				<td>${listValue.numOfPositions}</td>
-				<td><a class="btn btn-warning" href="/edit-todo">Edit Todo</a></td>
-                        <td><a class="btn btn-warning" href="/delete-todo">Delete Todo</a></td>
+				<td><a href="/edit-todo"><span class="glyphicon glyphicon-pencil"></span>Edit</a></td>
+                        <td><a href="/delete-todo"><span class="glyphicon glyphicon-trash"></span>Delete</a></td>
+                     
 			</tr>
 		</c:forEach>
 	</c:if>
 	</tbody>
+	
 	</table>
-	<div>
-            <a class="btn btn-default" href="/add-todo">Add a Todo</a>
-            
-        </div>
+	</span>
         <script src="webjars/jquery/1.9.1/jquery.min.js"></script>
         <script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     </div>
 	<br>
+<div class="container">
+	<c:url var="actionUrl" value="/vacancy" />
+
+<form:form action="${actionUrl}" modelAttribute="vacancy" method="POST" acceptCharset="UTF-8">
+  <div class="form-group row">
+    <form:label path="role" for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Role</form:label>
+    <div class="col-sm-3">
+      <form:input path="role" class="form-control form-control-sm" id="colFormLabelSm" placeholder="Role"/>
+    </div>
+  </div>
+  <div class="form-group row">
+    <form:label path="practice" for="colFormLabel" class="col-sm-2 col-form-label">Practice</form:label>
+    <div class="col-sm-3">
+      <form:input path="practice" class="form-control" id="colFormLabel" placeholder="Practice"/>
+    </div>
+  </div>
+  <div class="form-group row">
+    <form:label path="numOfPositions" for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">No. Positions</form:label>
+    <div class="col-sm-3">
+      <form:input path="numOfPositions" class="form-control form-control-lg" id="colFormLabelLg" placeholder="No. of Positions"/>
+    </div>
+  </div>
+  <form:button id="vacancy" class="btn btn-info">Add New Vacancy</form:button>
+
+</form:form>
+</div>
 </body>
 </html>

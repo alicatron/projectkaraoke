@@ -29,11 +29,16 @@ public class Recruiter {
 	public void setEmail(String email) {
 		Email = email;
 	}
-	public Recruiter(String firstName, String lastName, String email) {
+	public Recruiter(int id, String firstName, String lastName, String email) {
 		super();
+		this.id = id;
 		FirstName = firstName;
 		LastName = lastName;
 		Email = email;
+	}
+	
+	public Recruiter(){
+		
 	}
 	
 

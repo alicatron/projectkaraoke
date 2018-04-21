@@ -38,6 +38,10 @@ public class Vacancy {
 		NumOfPositions = numOfPositions;
 	}
 	
+	public Vacancy(){
+			
+		}
+	
 	
 	
 }

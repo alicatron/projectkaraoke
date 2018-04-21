@@ -21,18 +21,18 @@ public class MySQLRecruiters implements RecruiterData{
 			cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/karaoke?useSSL=false",
                     "root","c0nygre");
 			Statement st = cn.createStatement();
-			ResultSet rs = st.executeQuery("SELECT firstName, lastName, email FROM recruiter");
+			ResultSet rs = st.executeQuery("SELECT RecruiterID, firstName, lastName, email FROM recruiter");
 			
 			while(rs.next()){ 
-				recruiters.add(new Recruiter(rs.getString(1), rs.getString(2), rs.getString(3)));
+				recruiters.add(new Recruiter(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getString(4)));
 			}
 			cn.close();
 		}
 		catch(SQLException ex){
-		recruiters.add(new Recruiter(ex.getMessage(), ex.getMessage(), ex.getMessage()));
+		recruiters.add(new Recruiter(1,ex.getMessage(), ex.getMessage(), ex.getMessage()));
 		} catch (ClassNotFoundException ex) {
 			// TODO Auto-generated catch block
-			recruiters.add(new Recruiter("Driver" + ex.getMessage(),null, null));
+			recruiters.add(new Recruiter(1,"Driver" + ex.getMessage(),null, null));
 		}
 		return recruiters;
 	}

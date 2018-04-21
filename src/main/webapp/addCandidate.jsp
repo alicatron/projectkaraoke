@@ -10,11 +10,11 @@
 </head>
 <body>
 <h2>Add Candidate</h2>
-
+ 
 <c:url var="actionUrl" value="/addCandidate" />
-
+ 
 <form:form action="${actionUrl}" modelAttribute="candidate" method="POST" acceptCharset="UTF-8">
-		<table>
+        <table>
                 <tr>
                     <td><form:label path="lastName">LastName</form:label></td>
                     <td><form:input path="lastName"/></td>
@@ -39,13 +39,13 @@
                     <td><form:label path="vacancyId">Vacancy</form:label></td>
                     <td><form:input path="vacancyId"/></td>
                 </tr>
-                
+               
                 <!--<tr>
                     <td><input type="submit" value="Submit"/></td>
                 </tr>-->
             </table>
-    <form:button id="addCandidate">Add Person</form:button>
-	</form:form>
-
+    <form:button id="addCandidate" >Add Person</form:button>
+    </form:form>
+ 
 </body>
 </html>

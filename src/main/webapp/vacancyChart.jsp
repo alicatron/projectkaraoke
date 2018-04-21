@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="project.web.StartChart" %>
+    pageEncoding="ISO-8859-1" import="project.web.VacancyChart" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,10 +7,8 @@
 <title>Chart</title>
 </head>
 <body>
-
-
-<h2>Number of Hires</h2> 
-<% StartChart.createPieChart(); %>
-<img src="/startDateChart">
+<h2>Volume of Hires by Role</h2> 
+<% VacancyChart.createBarChart(); %>
+<img src="/vacancyChart">
 </body>
 </html>

@@ -13,9 +13,9 @@ import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.data.general.DefaultPieDataset;
 
-public class RoleChart{
+
+public class VacancyChart{
 	
 	public static JFreeChart createBarChart(){
 		Connection cn;
@@ -25,7 +25,7 @@ public class RoleChart{
 			Class.forName("com.mysql.jdbc.Driver");
 			cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/karaoke?useSSL=false",
 					"root","c0nygre");
-			PreparedStatement st = cn.prepareStatement("SELECT role, COUNT(*) AS 'Number of Roles Filled'  "
+			PreparedStatement st = cn.prepareStatement("SELECT role, numOfPositions "
 					+ "FROM vacancy v JOIN candidate c  WHERE v.vacancyid = c.vacancyid "
 					+ "GROUP BY role");
 			ResultSet rs = st.executeQuery();
@@ -34,10 +34,11 @@ public class RoleChart{
 			}
 			
 			
+			
 			chart = ChartFactory.createBarChart(
-					"No. of Hires Per Role", // chart title
+					"No. of Vacancies Per Role", // chart title
 					"Role",
-					"No. of Hires",
+					"No. of Vacancies",
 					dataset,
 					PlotOrientation.VERTICAL,
 					true,             // include legend
@@ -49,8 +50,8 @@ public class RoleChart{
 			cn.close();
 			int width = 640;   
 			int height = 480;  
-			File pieChart = new File( "role_chart.jpeg" ); 
-			ChartUtilities.saveChartAsJPEG( pieChart , chart , width , height );
+			File barChart = new File( "vacancy_chart.jpeg" ); 
+			ChartUtilities.saveChartAsJPEG( barChart , chart , width , height );
 			return chart;
 		}
 		catch (ClassNotFoundException ex) {

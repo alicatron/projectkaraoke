@@ -8,7 +8,8 @@
 </head>
 <body>
 <h2>Volume of Hires by Role</h2> 
+
 <% RoleChart.createBarChart(); %>
-<img src="/roleChart">
+<img src="/roleChart" >
 </body>
 </html>

@@ -1,19 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="project.dao.*,java.util.List" %>
+        pageEncoding="ISO-8859-1" import="project.dao.*,java.util.List" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<!DOCTYPE html>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+<!DOCTYPE html">
 <html>
 <head>
 <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"
         rel="stylesheet">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
  <link href="resources/navbar.css" rel="stylesheet">
-
-<title>Recruiter</title>
+<title>Insert title here</title>
 </head>
-
-
 
 <body>
 <div class="container">
@@ -59,23 +60,38 @@
       </nav>
     </div> <!-- /container -->
 
-<div class= "container">
-<div style = "float: right;">
-<c:if test="${not empty recruiters}">
-	<c:url var="actionUrl" value="/recruiterStats" />
-	<form:form action="${actionUrl}" modelAttribute="recruiter" method="GET" acceptCharset="UTF-8">
-	<select name="recruiterid">
-		<c:forEach var="listValue" items="${recruiters}">
-		<option value="${listValue.id}">${listValue.email}</option>
-		</c:forEach>
-		</select>
-		<form:button id="vacancy" class="btn btn-info"> View Stats <span class="glyphicon glyphicon-stats"></span></form:button>
-	</form:form>
-		</c:if>
+
+<div class="container">
+<%
+		String driverName = "com.mysql.jdbc.Driver";
+		String connectionUrl = "jdbc:mysql://localhost:3306/karaoke?useSSL=false";
+		String userId = "root";
+		String password = "c0nygre";
+				
+		Connection connection = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
+
+		
+		connection = DriverManager.getConnection(
+		connectionUrl, userId, password);
+		statement = connection.createStatement();
+		String sql = "SELECT FirstName, LastName FROM recruiter WHERE RecruiterID = " + request.getParameter("recruiterid") + ";";
+		resultSet = statement.executeQuery(sql);
+		
+		while (resultSet.next()) {
+			
+			String fname = resultSet.getString("FirstName");
+			String lname = resultSet.getString("LastName");
+			%>
+			<h2>Candidates Hired by <%=fname + " " + lname %></h2>
+			<% 
+		}
+		
+		%>
 		</div>
-	<br>
-</div>	
-	
+
+
 <div class="container">
         <table class="table table-striped">
             <thead class="p-3 mb-2 bg-primary text-white">
@@ -83,17 +99,20 @@
 		<th>First Name</th>
 		<th>Surname</th>
 		<th>Email</th>
+		<th>Start Date</th>
 		<th></th>
 		<th></th>
+		
 	</tr>
 	</thead>
 	<tbody>
-	<c:if test="${not empty recruiters}">
-		<c:forEach var="listValue" items="${recruiters}">
+	<c:if test="${not empty candidates}">
+		<c:forEach var="listValue" items="${candidates}">
 			<tr>
 				<td>${listValue.firstName}</td>
 				<td>${listValue.lastName}</td>
 				<td>${listValue.email}</td>
+				<td>${listValue.startDate}</td>
 				<td><a href="/edit-todo"><span class="glyphicon glyphicon-pencil"></span>Edit</a></td>
                         <td><a href="/delete-todo"><span class="glyphicon glyphicon-trash"></span>Delete</a></td>
 			</tr>
@@ -107,35 +126,10 @@
         <script src="webjars/jquery/1.9.1/jquery.min.js"></script>
         <script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     </div>
-	
-
 	<br>
+	<!--<a href="/addCandidate">Add candidate</a>-->
 	<div class="container">
-	<c:url var="actionUrl" value="/recruiter" />
-
-<form:form action="${actionUrl}" modelAttribute="recruiter" method="POST" acceptCharset="UTF-8">
-  <div class="form-group row">
-    <form:label path="firstName" for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">First Name</form:label>
-    <div class="col-sm-3">
-      <form:input path="firstName" class="form-control form-control-sm" id="colFormLabelSm" placeholder="First Name"/>
-    </div>
-  </div>
-  <div class="form-group row">
-    <form:label path="lastName" for="colFormLabel" class="col-sm-2 col-form-label">Surname</form:label>
-    <div class="col-sm-3">
-      <form:input path="lastName" class="form-control" id="colFormLabel" placeholder="Surname"/>
-    </div>
-  </div>
-  <div class="form-group row">
-    <form:label path="email" for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">Email</form:label>
-    <div class="col-sm-3">
-      <form:input path="email" class="form-control form-control-lg" id="colFormLabelLg" placeholder="email@email.com"/>
-    </div>
-  </div>
-  <form:button id="recruiter" class="btn btn-info">Add Recruiter</form:button>
-
-</form:form>
-
-
+	<a href="/recruiter" class="btn btn-info">Back</a>
+	</div>
 </body>
 </html>
