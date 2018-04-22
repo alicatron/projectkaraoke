@@ -26,19 +26,18 @@ public class PositionCountChart{
 			Class.forName("com.mysql.jdbc.Driver");
 			cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/karaoke?useSSL=false",
 					"root","c0nygre");
-			PreparedStatement st = cn.prepareStatement("SELECT role AS 'Role', COUNT(v.vacancyid) AS 'No. Roles Filled', numofpositions as 'Roles Available'  "
-					+ "FROM vacancy v JOIN candidate c  WHERE v.vacancyid = c.vacancyid "
-					+ "GROUP BY role");
+			PreparedStatement st = cn.prepareStatement("SELECT numofpositions, practice  "
+					+ "FROM vacancy "
+					+ "GROUP BY practice");
 			ResultSet rs = st.executeQuery();
 			while(rs.next()){ 
-				dataset.addValue(new Double(rs.getDouble(3)), rs.getString(1), " " );
+				dataset.addValue(new Double(rs.getDouble(1)), rs.getString(2), " " );
 			}
-			NumberAxis xAxis = new NumberAxis();
-			xAxis.setTickUnit(new NumberTickUnit(2));
+			
 			
 			chart = ChartFactory.createBarChart(
-					"Volume", // chart title
-					"Role" ,
+					"Positions Per Practice", // chart title
+					"Practice" ,
 					"No. Roles Required",
 					dataset,
 					PlotOrientation.VERTICAL,

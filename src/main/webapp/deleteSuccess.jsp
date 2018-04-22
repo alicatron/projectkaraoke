@@ -35,22 +35,18 @@
               <li><a href="/vacancy">Vacancies</a></li>
       <li><a href="/candidate">Hired Candidates</a></li>
       <li><a href="recruiter">Recruiters</a></li>
-      <li><a href="/charts">Charts</a></li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="/charts">Charts
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+        <li><a href="/charts">Charts</a></li>
+          <li><a href="/createChart">Hires Per Recruiter</a></li>
+          <li><a href="/roleChart">Hires Per Role </a></li>
+          <li><a href="/vacancyChart">Vacancies</a></li>
+          <li><a href="/startDateChart">Start Date</a></li>
+          <li><a href="/positionCountChart">Roles Required Per Practice</a></li>
+        </ul>
       </ul>
-      <ul class="dropdown-menu">
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li class="dropdown-header">Nav header</li>
-                  <li><a href="#">Separated link</a></li>
-                  <li><a href="#">One more separated link</a></li>
-                </ul>
-              </li>
-            </ul>
             
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
