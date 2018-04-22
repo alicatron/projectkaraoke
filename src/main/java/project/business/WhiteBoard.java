@@ -7,8 +7,8 @@ public class WhiteBoard extends Candidate {
 	public String hiredBy;
 	public String role;
 	
-	public WhiteBoard(String firstName, String lastName, String role, Date startDate, String hiredBy, String email, int recruiterId, int vacancyId) {
-		super(firstName, lastName, email, startDate, recruiterId, vacancyId);
+	public WhiteBoard(int id,String firstName, String lastName, String role, Date startDate, String hiredBy, String email, int recruiterId, int vacancyId) {
+		super(id, firstName, lastName, email, startDate, recruiterId, vacancyId);
 		this.hiredBy = hiredBy;
 		this.role = role;
 		

@@ -54,8 +54,9 @@ public class Candidate {
 	public void setStartDate(Date startDate) {
 		StartDate = startDate;
 	}
-	public Candidate(String firstName, String lastName, String email, Date startDate, int recruiterId, int vacacnyId) {
+	public Candidate(int id,String firstName, String lastName, String email, Date startDate, int recruiterId, int vacacnyId) {
 		super();
+		this.id = id;
 		FirstName = firstName;
 		LastName = lastName;
 		Email = email;

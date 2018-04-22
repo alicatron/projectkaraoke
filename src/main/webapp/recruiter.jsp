@@ -84,7 +84,7 @@
 		<th>Surname</th>
 		<th>Email</th>
 		<th></th>
-		<th></th>
+		<!--<th></th>-->
 	</tr>
 	</thead>
 	<tbody>
@@ -95,7 +95,7 @@
 				<td>${listValue.lastName}</td>
 				<td>${listValue.email}</td>
 				<td><a href="/edit-todo"><span class="glyphicon glyphicon-pencil"></span>Edit</a></td>
-                        <td><a href="/delete-todo"><span class="glyphicon glyphicon-trash"></span>Delete</a></td>
+                        <!--<td><a href="/delete-todo"><span class="glyphicon glyphicon-trash"></span>Delete</a></td>-->
 			</tr>
 		</c:forEach>
 	</c:if>

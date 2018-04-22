@@ -74,7 +74,7 @@
 		<th>Practice</th>
 		<th>Number of Positions</th>
 		<th></th>
-		<th></th>
+		<!--<th></th>-->
 	</tr>
 	</thead>
 	<tbody>
@@ -85,7 +85,7 @@
 				<td>${listValue.practice}</td>
 				<td>${listValue.numOfPositions}</td>
 				<td><a href="/edit-todo"><span class="glyphicon glyphicon-pencil"></span>Edit</a></td>
-                        <td><a href="/delete-todo"><span class="glyphicon glyphicon-trash"></span>Delete</a></td>
+                        <!--<td><a href="/delete-todo"><span class="glyphicon glyphicon-trash"></span>Delete</a></td>-->
                      
 			</tr>
 		</c:forEach>

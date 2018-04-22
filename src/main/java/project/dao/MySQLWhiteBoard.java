@@ -24,7 +24,7 @@ public class MySQLWhiteBoard implements WhiteBoardData {
 	                    "root","c0nygre");
 				Statement st = cn.createStatement();
 				
-				ResultSet rs = st.executeQuery("select candidate.LastName, candidate.FirstName, vacancy.role, candidate.StartDate, recruiter.email as 'hiredBy', candidate.email " + 
+				ResultSet rs = st.executeQuery("select candidate.candidateID, candidate.LastName, candidate.FirstName, vacancy.role, candidate.StartDate, recruiter.email as 'hiredBy', candidate.email " + 
 						"from candidate left join recruiter on candidate.recruiterID = recruiter.recruiterID " +
 						"left join vacancy on candidate.VacancyID = vacancy.VacancyID;");
 				System.out.println(rs.toString());
@@ -32,13 +32,13 @@ public class MySQLWhiteBoard implements WhiteBoardData {
 				while(rs.next()){
 					
 					//vacancies.add(new Vacancy(rs.getString(2),rs.getString(3),rs.getInt(4)));
-					whiteboardFigures.add(new WhiteBoard(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDate(4), rs.getString("hiredBy"),rs.getString(6),1,1));
+					whiteboardFigures.add(new WhiteBoard(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getString("hiredBy"),rs.getString(7),1,1));
 				}
 		   }catch(SQLException ex){
-				whiteboardFigures.add(new WhiteBoard(ex.getMessage(),null, null,null,null,null,1,1));
+				whiteboardFigures.add(new WhiteBoard(1,ex.getMessage(),null, null,null,null,null,1,1));
 		   } 
 		   catch (ClassNotFoundException ex) {
-			   whiteboardFigures.add(new WhiteBoard("Driver"+ ex.getMessage(),null, null,null,null,null,1,1));
+			   whiteboardFigures.add(new WhiteBoard(1,"Driver"+ ex.getMessage(),null, null,null,null,null,1,1));
 				
 			}
 		return whiteboardFigures;

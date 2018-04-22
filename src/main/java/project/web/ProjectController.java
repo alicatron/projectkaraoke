@@ -25,6 +25,7 @@ import project.dao.MySQLAddVacancy;
 import project.dao.MySQLAddRecruiter;
 import project.dao.MySQLRecruiterStats;
 import project.dao.MySQLRecruiterHires;
+import project.dao.MySQLDeleteCandidate;
 
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.validation.Valid;
@@ -99,6 +100,31 @@ public class ProjectController {
 		List<Candidate> candidates = RHData.getProducts(id);
 		result.addObject("candidates",candidates);
 		result.setViewName("recruiterStats");
+		return result;
+	}
+	@RequestMapping(value = "/deleteCandidate", method = RequestMethod.GET)
+	public ModelAndView deleteCandidate(@RequestParam(name="candidateid") String candidateid){
+		ModelAndView result = new ModelAndView();
+		result.addObject("candidate", new Candidate());
+		return result;
+		
+	}
+	@RequestMapping(value = "/deleteCandidate", method = RequestMethod.POST)
+	public ModelAndView ConfirmDeleteCandidate(@Valid @ModelAttribute("candidate") Candidate candidate, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return add();
+        }
+        //System.out.println("CANDIDATE " + candidate.getLastName());
+        MySQLDeleteCandidate DeleteCandidate = new MySQLDeleteCandidate(candidate);
+        //System.out.println(AddCandidate.toString());
+        
+        return sucessfulDelete();
+	}
+	
+	@RequestMapping("/deleteSuccess")
+	public ModelAndView sucessfulDelete(){
+		ModelAndView result = new ModelAndView();
+		result.setViewName("deleteSuccess");
 		return result;
 	}
 	

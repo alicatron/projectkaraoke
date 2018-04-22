@@ -90,7 +90,7 @@
 				<td>${listValue.email}</td>
 				<td>${listValue.startDate}</td>
 				<td><a href="/edit-todo"><span class="glyphicon glyphicon-pencil"></span>Edit</a></td>
-                        <td><a href="/delete-todo"><span class="glyphicon glyphicon-trash"></span>Delete</a></td>
+                <td><a href="/deleteCandidate?candidateid=${listValue.id}"><span class="glyphicon glyphicon-trash"></span>Delete</a></td>
 			</tr>
 		</c:forEach>
 	</c:if>
@@ -107,11 +107,10 @@
 <div class="container">
 	<c:url var="actionUrl" value="/candidate" />
 	
-	<
+	
 	 
  
 <form:form action="${actionUrl}" modelAttribute="candidate" method="POST" acceptCharset="UTF-8">
-<<<<<<< HEAD
        
         <div class="form-group row">
     <form:label path="firstName" for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">First Name</form:label>
@@ -137,7 +136,7 @@
       <form:input path="startDate" class="form-control form-control-lg" id="colFormLabelLg" type="date"/>
     </div>
   </div>
-  <div class="form-group row">
+  <!--<div class="form-group row">
     <form:label path="recruiterId" for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">Recruiter</form:label>
     <div class="col-sm-3">
       <form:input path="recruiterId" class="form-control form-control-lg" id="colFormLabelLg" placeholder="Recruiter"/>
@@ -153,7 +152,7 @@
 		</c:forEach>
 		</select>
     </div>
-  </div>
+  </div>-->
 
 
  
@@ -209,9 +208,12 @@
 		String sql = "SELECT RecruiterID, Email FROM recruiter;";
 		resultSet = statement.executeQuery(sql);
 		%>
-                <tr>
-                 <td><form:label path="recruiterId">Recruiter</form:label></td>
-                <td><form:select path="recruiterId">
+		
+		<div class="form-group row">
+    <form:label path="recruiterId" for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">Recruiter</form:label>
+    <div class="col-sm-3">
+    
+       			<form:select path="recruiterId" class="form-control form-control-lg" id="colFormLabelLg" placeholder="Recruiter">
 					<%
 						while(resultSet.next()){
 							System.out.println("WORKS " + resultSet.getInt(1));
@@ -219,20 +221,14 @@
 							resultSet.getString(2) + "</option>");
 						}				
 					%>
-				</form:select></td>
->>>>>>> branch 'master' of https://github.com/alicatron/projectkaraoke.git
-				</tr>
-<<<<<<< HEAD
-				<select name="recruiterid">
-					<c:forEach var="listValue" items="${recruiters}">
-					<option value="${listValue.id}">${listValue.email}</option>
-					</c:forEach>
-				</select> -->
-
-=======
-				<tr>
-                 <td><form:label path="vacancyId">Vacancy</form:label></td>
-                <td><form:select path="vacancyId">
+				</form:select>
+			</div>
+			</div>
+			
+			<div class="form-group row">
+    <form:label path="vacancyId" for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">Vacancy</form:label>
+    <div class="col-sm-3">
+                <form:select path="vacancyId" class="form-control form-control-lg" id="colFormLabelLg" placeholder="Vacancy">
 					<%
 						String sql2 = "SELECT VacancyID, Role From vacancy;";
 						resultSet2 = statement.executeQuery(sql2);
@@ -241,19 +237,18 @@
 							resultSet2.getString(2) + "</option>");
 						}				
 					%>
-				</form:select></td>
-				</tr>
+				</form:select>
+				</div>
+				</div>
 				
->>>>>>> branch 'master' of https://github.com/alicatron/projectkaraoke.git
-               
-<<<<<<< HEAD
+				
+
             
     <form:button id="candidate" class="btn btn-info">Add Candidate</form:button>
-=======
-                <tr>
+                <!--<tr>
                     <td><input type="submit" value="Submit"/></td>
-                </tr>
-            </table>
+                </tr>-->
+            
     <!--<form:button id="addCandidate">Add Person</form:button>
 >>>>>>> branch 'master' of https://github.com/alicatron/projectkaraoke.git
     </form:form>
