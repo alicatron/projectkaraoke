@@ -36,7 +36,7 @@ public class VacancyChart{
 			
 			
 			chart = ChartFactory.createBarChart(
-					"No. of Vacancies Per Role", // chart title
+					"Vacancies Per Role", // chart title
 					"Role",
 					"No. of Vacancies",
 					dataset,

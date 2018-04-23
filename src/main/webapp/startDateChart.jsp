@@ -10,7 +10,7 @@
 
 
 <h2>Number of Hires</h2> 
-<% StartChart.createPieChart(); %>
+<% StartChart.createBarChart(); %>
 <img src="/startDateChart">
 </body>
 </html>

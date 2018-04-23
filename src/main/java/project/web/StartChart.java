@@ -11,15 +11,17 @@ import java.sql.SQLException;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
 public class StartChart{
 	
-	public static JFreeChart createPieChart(){
+	public static JFreeChart createBarChart(){
 		Connection cn;
 		JFreeChart chart = null;
 		try{
-			DefaultPieDataset dataset = new DefaultPieDataset( );
+			DefaultCategoryDataset dataset = new DefaultCategoryDataset( );
 			Class.forName("com.mysql.jdbc.Driver");
 			cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/karaoke?useSSL=false",
 					"root","c0nygre");
@@ -28,21 +30,24 @@ public class StartChart{
 					+ "GROUP BY startDate");
 			ResultSet rs = st.executeQuery();
 			while(rs.next()){ 
-				dataset.setValue(rs.getDate(1), new Double( rs.getDouble(2) ) );
+				dataset.addValue(new Double( rs.getDouble(2) ), rs.getDate(1), "" );
 			}
 			
 			
-			chart = ChartFactory.createPieChart(
-					"Start Date Chart", // chart title
-					dataset,          // data
+			chart = ChartFactory.createBarChart(
+					"Start Date",
+					"Date",
+					"No. of Starters",
+					dataset,
+					PlotOrientation.VERTICAL,
 					true,             // include legend
 					true,
 					false);
 			cn.close();
 			int width = 640;   
 			int height = 480;  
-			File pieChart = new File( "start_date.jpeg" ); 
-			ChartUtilities.saveChartAsJPEG( pieChart , chart , width , height );
+			File barChart = new File( "start_date.jpeg" ); 
+			ChartUtilities.saveChartAsJPEG( barChart , chart , width , height );
 			return chart;
 		}
 		catch (ClassNotFoundException ex) {

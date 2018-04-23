@@ -202,7 +202,7 @@ public class ProjectController {
 		response.setContentType("image/jpeg");
 		try{
 			OutputStream out = response.getOutputStream();
-			ChartUtilities.writeChartAsJPEG(out, StartChart.createPieChart(), 640, 480);
+			ChartUtilities.writeChartAsJPEG(out, StartChart.createBarChart(), 640, 480);
 		}
 		catch(IOException e){
 			System.out.println(e.getMessage());
