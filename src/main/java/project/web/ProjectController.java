@@ -65,9 +65,9 @@ public class ProjectController {
 	public String charts() {
 		return "charts";}
 	
-	@RequestMapping("/stats")
-	public String stats() {
-		return "stats";}
+	@RequestMapping("/errorpage")
+	public String errorpage() {
+		return "errorpage";}
 
 
 	@RequestMapping(value ="/vacancy",  method = RequestMethod.GET)
