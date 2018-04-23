@@ -39,11 +39,11 @@
         <a class="dropdown-toggle" data-toggle="dropdown" href="/charts">Charts<span class="glyphicon glyphicon-stats"></span>
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="/createChart">Hires Per Recruiter</a></li>
-          <li><a href="/roleChart">Hires Per Role </a></li>
-          <li><a href="/startDateChart">Start Date</a></li>
-          <li><a href="/vacancyChart">Vacancies Per Role</a></li>
-          <li><a href="/positionCountChart">Vacancies Per Practice</a></li>
+          <li><a href="/createChart" target="_blank">Hires Per Recruiter</a></li>
+          <li><a href="/roleChart" target="_blank">Hires Per Role </a></li>
+          <li><a href="/startDateChart" target="_blank">Start Date</a></li>
+          <li><a href="/vacancyChart" target="_blank">Vacancies Per Role</a></li>
+          <li><a href="/positionCountChart" target="_blank">Vacancies Per Practice</a></li>
         </ul>
       </ul>
             
@@ -54,7 +54,7 @@
 
 <div class= "container">
 <div style = "float: right;">
-<a href="/vacancyChart"><button id="vacancy" class="btn btn-info"> View Graph <span class="glyphicon glyphicon-stats"></span></button></a>
+<a href="/vacancyChart" target="_blank"><button id="vacancy" class="btn btn-info"> View Graph <span class="glyphicon glyphicon-stats"></span></button></a>
 </div>
 </div>
 

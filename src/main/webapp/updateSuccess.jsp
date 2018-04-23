@@ -39,14 +39,14 @@
         <a class="dropdown-toggle" data-toggle="dropdown" href="/charts">Charts
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
-        <li><a href="/charts">Charts</a></li>
-          <li><a href="/createChart">Hires Per Recruiter</a></li>
-          <li><a href="/roleChart">Hires Per Role </a></li>
-          <li><a href="/vacancyChart">Vacancies</a></li>
-          <li><a href="/startDateChart">Start Date</a></li>
-          <li><a href="/positionCountChart">Roles Required Per Practice</a></li>
+          <li><a href="/createChart" target="_blank">Hires Per Recruiter</a></li>
+          <li><a href="/roleChart" target="_blank">Hires Per Role </a></li>
+          <li><a href="/startDateChart" target="_blank">Start Date</a></li>
+          <li><a href="/vacancyChart" target="_blank">Vacancies Per Role</a></li>
+          <li><a href="/positionCountChart" target="_blank">Vacancies Per Practice</a></li>
         </ul>
       </ul>
+            
             
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
@@ -54,6 +54,10 @@
     </div> <!-- /container -->
     <div class="container">
 <h2>Your update has been successfully applied</h2>
+
+<div class="container">
+	<a href="/" class="btn btn-info">Home<span class="glyphicon glyphicon-home"></span></a>
+	</div>
 </div>
 </body>
 </html>
