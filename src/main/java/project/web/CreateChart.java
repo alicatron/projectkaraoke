@@ -37,7 +37,7 @@ public class CreateChart{
 			}
 			
 			chart = ChartFactory.createBarChart(
-					"Hire Count", // chart title
+					"Hires Per Recruiter", // chart title
 					"Recruiter" ,
 					"Number Of Hires",
 					dataset,

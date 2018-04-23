@@ -22,7 +22,7 @@ public class MySQLVacancies implements VacancyData {
 				cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/karaoke?useSSL=false",
 	                    "root","c0nygre");
 				Statement st = cn.createStatement();
-				ResultSet rs = st.executeQuery("SELECT * FROM vacancy");
+				ResultSet rs = st.executeQuery("SELECT * FROM vacancy ORDER BY Practice");
 				
 				while(rs.next()){
 					

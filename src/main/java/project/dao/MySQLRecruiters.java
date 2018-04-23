@@ -21,7 +21,7 @@ public class MySQLRecruiters implements RecruiterData{
 			cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/karaoke?useSSL=false",
                     "root","c0nygre");
 			Statement st = cn.createStatement();
-			ResultSet rs = st.executeQuery("SELECT RecruiterID, firstName, lastName, email FROM recruiter");
+			ResultSet rs = st.executeQuery("SELECT RecruiterID, firstName, lastName, email FROM recruiter ORDER BY firstName");
 			
 			while(rs.next()){ 
 				recruiters.add(new Recruiter(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getString(4)));

@@ -68,9 +68,12 @@ public class ProjectController {
 	public String charts() {
 		return "charts";}
 	
-	@RequestMapping("/stats")
-	public String stats() {
-		return "stats";}
+	@RequestMapping("/errorpage")
+	public ModelAndView errorpage() {
+		ModelAndView result = new ModelAndView();
+		result.setViewName("errorpage");
+		return result;
+		}
 
 
 	@RequestMapping(value ="/vacancy",  method = RequestMethod.GET)
@@ -86,7 +89,7 @@ public class ProjectController {
 	@RequestMapping(value ="/vacancy",  method = RequestMethod.POST)
 	public ModelAndView addVacancy(@Valid @ModelAttribute("vacancy") Vacancy vacancy, BindingResult bindingResult){
 		if (bindingResult.hasErrors()){
-         return vacancy();
+         return errorpage();
          }
 		 MySQLAddVacancy AddVacancy = new MySQLAddVacancy(vacancy);
 		 return vacancy();
@@ -103,7 +106,7 @@ public class ProjectController {
 	@RequestMapping(value ="/editVacancy",  method = RequestMethod.POST)
 	public ModelAndView editVacancyForm(@Valid @ModelAttribute("vacancy") Vacancy vacancy, BindingResult bindingResult){
 		if (bindingResult.hasErrors()){
-         return vacancy();
+         return errorpage();
          }
 		 MySQLUpdateVacancy editVacancy = new MySQLUpdateVacancy(vacancy);
 		 return Success();
@@ -132,7 +135,7 @@ public class ProjectController {
 	@RequestMapping(value = "/deleteCandidate", method = RequestMethod.POST)
 	public ModelAndView ConfirmDeleteCandidate(@Valid @ModelAttribute("candidate") Candidate candidate, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return add();
+            return errorpage();
         }
         //System.out.println("CANDIDATE " + candidate.getLastName());
         MySQLDeleteCandidate DeleteCandidate = new MySQLDeleteCandidate(candidate);
@@ -158,7 +161,7 @@ public class ProjectController {
 	@RequestMapping(value = "/editCandidate", method = RequestMethod.POST)
 	public ModelAndView EditCandidateForm(@Valid @ModelAttribute("candidate") Candidate candidate, BindingResult bindingResult){
 		if (bindingResult.hasErrors()) {
-            return candidate();
+            return errorpage();
         }
 		MySQLUpdateCandidate EditCandidate = new MySQLUpdateCandidate(candidate);
 		return Success();
@@ -184,7 +187,7 @@ public class ProjectController {
 	@RequestMapping(value= "/recruiter", method = RequestMethod.POST)
 	public ModelAndView addRecuiter(@Valid @ModelAttribute("recruiter") Recruiter recruiter, BindingResult bindingResult){
 		if(bindingResult.hasErrors()){
-			return recruiter();
+			return errorpage();
 		}
 		MySQLAddRecruiter AddRecruiter = new MySQLAddRecruiter(recruiter);
 		return recruiter();
@@ -204,7 +207,7 @@ public class ProjectController {
 	@RequestMapping(value="/candidate", method = RequestMethod.POST)
 	public ModelAndView addCandidate(@Valid @ModelAttribute("candidate") Candidate candidate, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return add();
+            return errorpage();
         }
         //System.out.println("CANDIDATE " + candidate.getLastName());
         MySQLAddCandidate AddCandidate = new MySQLAddCandidate(candidate);
@@ -243,7 +246,7 @@ public class ProjectController {
 		response.setContentType("image/jpeg");
 		try{
 			OutputStream out = response.getOutputStream();
-			ChartUtilities.writeChartAsJPEG(out, StartChart.createPieChart(), 640, 480);
+			ChartUtilities.writeChartAsJPEG(out, StartChart.createBarChart(), 640, 480);
 		}
 		catch(IOException e){
 			System.out.println(e.getMessage());
@@ -286,7 +289,7 @@ public class ProjectController {
 	    @RequestMapping(value = "/addCandidate", method = RequestMethod.POST)
 	    public ModelAndView processAdd(@Valid @ModelAttribute("candidate") Candidate candidate, BindingResult bindingResult) {
 	        if (bindingResult.hasErrors()) {
-	            return add();
+	            return errorpage();
 	        }
 	        //System.out.println("CANDIDATE " + candidate.getLastName());
 	        MySQLAddCandidate AddCandidate = new MySQLAddCandidate(candidate);

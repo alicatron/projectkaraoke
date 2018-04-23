@@ -6,12 +6,14 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Charts</title>
+<title>Title</title>
 <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"
         rel="stylesheet">
-        <link href="resources/navbar.css" rel="stylesheet">
+         <link href="resources/navbar.css" rel="stylesheet">
 </head>
-<body>
+
+
+<body marginwidth="0" marginheight="0">
 <div class="container">
  
       <!-- Static navbar -->
@@ -33,22 +35,17 @@
               <li><a href="/vacancy">Vacancies</a></li>
       <li><a href="/candidate">Hired Candidates</a></li>
       <li><a href="recruiter">Recruiters</a></li>
-      <li><a href="/charts">Charts</a></li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="/charts">Charts<span class="glyphicon glyphicon-stats"></span>
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/createChart">Hires Per Recruiter</a></li>
+          <li><a href="/roleChart">Hires Per Role </a></li>
+          <li><a href="/startDateChart">Start Date</a></li>
+          <li><a href="/vacancyChart">Vacancies Per Role</a></li>
+          <li><a href="/positionCountChart">Vacancies Per Practice</a></li>
+        </ul>
       </ul>
-      <ul class="dropdown-menu">
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li class="dropdown-header">Nav header</li>
-                  <li><a href="#">Separated link</a></li>
-                  <li><a href="#">One more separated link</a></li>
-                </ul>
-              </li>
-            </ul>
             
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
@@ -56,21 +53,32 @@
     </div> <!-- /container -->
 
 
-      
-      <div style="width: 50%; overflow: hidden; float: left;">
-           <img src="http://localhost:8080/roleChart" alt="Chart">
-           </div>
-           
-          <div style="width: 50%; overflow: hidden; float: right;">
-           <img src="http://localhost:8080/vacancyChart" alt="Chart2">
-           </div>
-           
-       
+  
+    <div class="container" align="center">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="error-template">
+                <h1>
+                    Oops!</h1>
+                <div class="error-details">
+                    Sorry, an error has occurred.
+                </div>
+                <br>
+                <div class="error-actions">
+                    <a href="http://localhost:8080/" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-home"></span>
+                        Take Me Home </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+   
 
         <div>
         <script src="webjars/jquery/1.9.1/jquery.min.js"></script>
         <script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     </div>
+    
 
 <br><br>
 </body>

@@ -26,7 +26,7 @@ public class MySQLWhiteBoard implements WhiteBoardData {
 				
 				ResultSet rs = st.executeQuery("select candidate.candidateID, candidate.LastName, candidate.FirstName, vacancy.role, candidate.StartDate, recruiter.email as 'hiredBy', candidate.email " + 
 						"from candidate left join recruiter on candidate.recruiterID = recruiter.recruiterID " +
-						"left join vacancy on candidate.VacancyID = vacancy.VacancyID;");
+						"left join vacancy on candidate.VacancyID = vacancy.VacancyID ORDER BY recruiter.email;");
 				System.out.println(rs.toString());
 				
 				while(rs.next()){

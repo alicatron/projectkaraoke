@@ -36,7 +36,7 @@ public class PositionCountChart{
 			
 			
 			chart = ChartFactory.createBarChart(
-					"Positions Per Practice", // chart title
+					"Vacancies Per Practice", // chart title
 					"Practice" ,
 					"No. Roles Required",
 					dataset,

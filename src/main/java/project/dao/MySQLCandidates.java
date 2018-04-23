@@ -21,7 +21,7 @@ public class MySQLCandidates implements CandidateData {
 			cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/karaoke?useSSL=false",
                     "root","c0nygre");
 			Statement st = cn.createStatement();
-			ResultSet rs = st.executeQuery("SELECT * FROM Candidate");
+			ResultSet rs = st.executeQuery("SELECT * FROM Candidate ORDER BY FirstName");
 			
 			while(rs.next()){
 				

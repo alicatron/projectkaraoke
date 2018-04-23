@@ -55,5 +55,9 @@
     <div class="container">
 <h2>Candidate Deleted Successfully</h2>
 </div>
+
+<div class="container">
+	<a href="/" class="btn btn-info">Back</a>
+	</div>
 </body>
 </html>

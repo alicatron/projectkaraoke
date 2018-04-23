@@ -27,7 +27,7 @@ public class MySQLRecruiterHires implements RecruiterHireData {
 			cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/karaoke?useSSL=false",
                     "root","c0nygre");
 			Statement st = cn.createStatement();
-			ResultSet rs = st.executeQuery("SELECT * FROM Candidate WHERE RecruiterID ="+ id +";");
+			ResultSet rs = st.executeQuery("SELECT * FROM Candidate WHERE RecruiterID ="+ id +" ORDER BY FirstName;");
 			System.out.println("ID is " + id);
 			while(rs.next()){
 				

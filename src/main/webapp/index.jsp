@@ -39,11 +39,11 @@
         <a class="dropdown-toggle" data-toggle="dropdown" href="/charts">Charts<span class="glyphicon glyphicon-stats"></span>
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
-        <li><a href="/charts">Charts</a></li>
           <li><a href="/createChart">Hires Per Recruiter</a></li>
           <li><a href="/roleChart">Hires Per Role </a></li>
-          <li><a href="/vacancyChart">Vacancies</a></li>
           <li><a href="/startDateChart">Start Date</a></li>
+          <li><a href="/vacancyChart">Vacancies Per Role</a></li>
+          <li><a href="/positionCountChart">Vacancies Per Practice</a></li>
         </ul>
       </ul>
             
@@ -53,9 +53,69 @@
     </div> <!-- /container -->
 
 <div class="container" align="center">
-<img src="http://localhost:8080/createChart" alt="Chart" style="width:640px;height:420px;">
+  <h2>Executive Summary Charts</h2>
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+
+      <div class="item active">
+        <img src="http://localhost:8080/createChart" alt="Hires Per Recruiter" align="middle">
+        <div class="carousel-caption">
+          <h3>Hires Per Recruiter</h3>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="http://localhost:8080/roleChart" alt="Hires Per Role" align="middle">
+        <div class="carousel-caption">
+          <h3>Hires Per Role</h3>
+        </div>
+      </div>
+    
+      <div class="item">
+        <img src="http://localhost:8080/startDateChart" alt="Start Date" align="middle">
+        <div class="carousel-caption">
+          <h3>Start Date</h3>
+        </div>
+      </div>
+      
+      
+      <div class="item">
+        <img src="http://localhost:8080/vacancyChart" alt="Vacancy" align="middle">
+        <div class="carousel-caption">
+          <h3>Vacancies Per Role</h3>
+        </div>
+      </div>
+      
+      <div class="item">
+        <img src="http://localhost:8080/positionCountChart" alt="Practice" align="middle">
+        <div class="carousel-caption">
+          <h3>Vacancies Per Practice</h3>
+        </div>
+      </div>
+  
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
 </div>
-<br><br><br>
 
 <div class="container">
         <table class="table table-striped table-hover table-bordered">

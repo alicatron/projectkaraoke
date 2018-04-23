@@ -35,7 +35,7 @@ public class RoleChart{
 			
 			
 			chart = ChartFactory.createBarChart(
-					"No. of Hires Per Role", // chart title
+					"Hires Per Role", // chart title
 					"Role",
 					"No. of Hires",
 					dataset,
