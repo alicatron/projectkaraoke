@@ -6,6 +6,7 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
+<%@page import="java.util.Date" %>
 
 
 <!DOCTYPE html>
@@ -65,34 +66,6 @@
 </div>
 
 <div class="container">
-        <table class="table table-striped table-hover table-bordered">
-        
-            <thead class="p-3 mb-2 bg-primary text-white">
-	<tr>
-		<th>First Name</th>
-		<th>Surname</th>
-		<th>Email</th>
-		<th>Start Date</th>
-		<th></th>
-		<th></th>
-	</tr>
-	</thead>
-            <tbody>
-	<c:if test="${not empty candidates}">
-		<c:forEach var="listValue" items="${candidates}">
-			<tr>
-				<td>${listValue.firstName}</td>
-				<td>${listValue.lastName}</td>
-				<td>${listValue.email}</td>
-				<td>${listValue.startDate}</td>
-				<td><a href="/editCandidate?candidateid=${listValue.id }"><span class="glyphicon glyphicon-pencil"></span>Edit</a></td>
-                <td><a href="/deleteCandidate?candidateid=${listValue.id}"><span class="glyphicon glyphicon-trash"></span>Delete</a></td>
-			</tr>
-		</c:forEach>
-	</c:if>
-	</tbody>
-	</table>
-
         <script src="webjars/jquery/1.9.1/jquery.min.js"></script>
         <script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     </div>
@@ -101,37 +74,64 @@
 
 
 <div class="container">
-	<c:url var="actionUrl" value="/candidate" />
+	<c:url var="actionUrl" value="/editCandidate" />
 	
-	
-	 
- 
 <form:form action="${actionUrl}" modelAttribute="candidate" method="POST" acceptCharset="UTF-8">
-       
+                        <%
+		String driverName = "com.mysql.jdbc.Driver";
+		String connectionUrl = "jdbc:mysql://localhost:3306/karaoke?useSSL=false";
+		String userId = "root";
+		String password = "c0nygre";
+			
+		Connection connection = null;
+		Statement stmnt = null;
+		ResultSet candidateInfo = null;
+
+		
+		connection = DriverManager.getConnection(
+		connectionUrl, userId, password);
+		String Param = request.getParameter("candidateid");
+		int CanId = Integer.parseInt(Param);
+		stmnt = connection.createStatement();
+		String sqlQuery = "SELECT * FROM candidate WHERE CandidateID = " + CanId +";";
+		candidateInfo = stmnt.executeQuery(sqlQuery);
+		
+		while(candidateInfo.next()){
+			String Fname = candidateInfo.getString("FirstName");
+			String Lname = candidateInfo.getString("LastName");
+			String Email = candidateInfo.getString("Email");
+			Date StartDate = candidateInfo.getDate("StartDate");
+			int RecruiterID = candidateInfo.getInt("RecruiterID");
+			int VacancyID = candidateInfo.getInt("VacancyID");			
+		%>
         <div class="form-group row">
+        <form:input path="id" type ="hidden" value="<%=CanId %>"/>
     <form:label path="firstName" for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">First Name</form:label>
     <div class="col-sm-3">
-      <form:input path="firstName" class="form-control form-control-sm" id="colFormLabelSm" placeholder="First Name"/>
+      <form:input path="firstName" class="form-control form-control-sm" id="colFormLabelSm" placeholder="First Name" value="<%=Fname %>"/>
     </div>
   </div>
             <div class="form-group row">
     <form:label path="lastName" for="colFormLabel" class="col-sm-2 col-form-label">Surname</form:label>
     <div class="col-sm-3">
-      <form:input path="lastName" class="form-control" id="colFormLabel" placeholder="Surname"/>
+      <form:input path="lastName" class="form-control" id="colFormLabel" placeholder="Surname" value="<%=Lname %>"/>
     </div>
   </div>
   <div class="form-group row">
     <form:label path="email" for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">Email</form:label>
     <div class="col-sm-3">
-      <form:input path="email" class="form-control form-control-lg" id="colFormLabelLg" placeholder="email@email.com"/>
+      <form:input path="email" class="form-control form-control-lg" id="colFormLabelLg" placeholder="email@email.com" value="<%=Email %>"/>
     </div>
   </div>
   <div class="form-group row">
     <form:label path="startDate" for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">Date</form:label>
     <div class="col-sm-3">
-      <form:input path="startDate" class="form-control form-control-lg" id="colFormLabelLg" type="date"/>
+      <form:input path="startDate" class="form-control form-control-lg" id="colFormLabelLg" type="date" value="<%=StartDate %>"/>
     </div>
   </div>
+  <%
+  }
+  %>
   <!--<div class="form-group row">
     <form:label path="recruiterId" for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">Recruiter</form:label>
     <div class="col-sm-3">
@@ -187,12 +187,12 @@
                 </tr>-->
                 
                 <%
-		String driverName = "com.mysql.jdbc.Driver";
+		/*String driverName = "com.mysql.jdbc.Driver";
 		String connectionUrl = "jdbc:mysql://localhost:3306/karaoke?useSSL=false";
 		String userId = "root";
 		String password = "c0nygre";
 			
-		Connection connection = null;
+		Connection connection = null;*/
 		Statement statement = null;
 		ResultSet resultSet = null;
 		ResultSet resultSet2 = null;
@@ -240,7 +240,7 @@
 				
 
             
-    <form:button id="candidate" class="btn btn-info">Add Candidate</form:button>
+    <form:button id="editCandidate" class="btn btn-info">Update Candidate</form:button>
                 <!--<tr>
                     <td><input type="submit" value="Submit"/></td>
                 </tr>-->

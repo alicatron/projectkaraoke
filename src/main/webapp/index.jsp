@@ -81,8 +81,8 @@
 				<td>${listValue.role}</td>
 				<td>${listValue.startDate}</td>
 				<td>${listValue.hiredBy}</td>
-				<td><a href="/edit-todo"><span class="glyphicon glyphicon-pencil"></span>Edit</a></td>
-                        <td><a href="/deleteCandidate?candidateid=${listValue.id}"><span class="glyphicon glyphicon-trash"></span>Delete</a></td>
+				<td><a href="/editCandidate?candidateid=${listValue.id }"><span class="glyphicon glyphicon-pencil"></span>Edit</a></td>
+                <td><a href="/deleteCandidate?candidateid=${listValue.id}"><span class="glyphicon glyphicon-trash"></span>Delete</a></td>
 			</tr>
 		</c:forEach>
 	</c:if>

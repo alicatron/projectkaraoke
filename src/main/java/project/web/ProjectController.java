@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 
+
 import project.business.*;
 
 import java.io.IOException;
@@ -26,6 +27,8 @@ import project.dao.MySQLAddRecruiter;
 import project.dao.MySQLRecruiterStats;
 import project.dao.MySQLRecruiterHires;
 import project.dao.MySQLDeleteCandidate;
+import project.dao.MySQLUpdateCandidate;
+import project.dao.MySQLUpdateVacancy;
 
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.validation.Valid;
@@ -88,6 +91,23 @@ public class ProjectController {
 		 MySQLAddVacancy AddVacancy = new MySQLAddVacancy(vacancy);
 		 return vacancy();
 	}
+	
+	@RequestMapping(value="/editVacancy", method = RequestMethod.GET)
+	public ModelAndView editVacancy(@RequestParam(name="vacancyid") String vacancyid){
+		ModelAndView result = new ModelAndView();
+		result.addObject("vacancy", new Vacancy());
+		result.setViewName("editVacancy");
+		return result;
+	}
+	
+	@RequestMapping(value ="/editVacancy",  method = RequestMethod.POST)
+	public ModelAndView editVacancyForm(@Valid @ModelAttribute("vacancy") Vacancy vacancy, BindingResult bindingResult){
+		if (bindingResult.hasErrors()){
+         return vacancy();
+         }
+		 MySQLUpdateVacancy editVacancy = new MySQLUpdateVacancy(vacancy);
+		 return Success();
+	}
 	@RequestMapping(value = "/recruiterStats", method = RequestMethod.GET)
 	//modelAndView
 	public ModelAndView recruiterStats(@RequestParam(name="recruiterid") String recruiterid){
@@ -128,6 +148,27 @@ public class ProjectController {
 		return result;
 	}
 	
+	@RequestMapping(value = "/editCandidate", method = RequestMethod.GET)
+	public ModelAndView EditCandidate(@RequestParam(name="candidateid") String candidateid){
+		ModelAndView result = new ModelAndView();
+		result.addObject("candidate", new Candidate());
+		return result;
+	}
+	
+	@RequestMapping(value = "/editCandidate", method = RequestMethod.POST)
+	public ModelAndView EditCandidateForm(@Valid @ModelAttribute("candidate") Candidate candidate, BindingResult bindingResult){
+		if (bindingResult.hasErrors()) {
+            return candidate();
+        }
+		MySQLUpdateCandidate EditCandidate = new MySQLUpdateCandidate(candidate);
+		return Success();
+	}
+	@RequestMapping("/updateSuccess")
+	public ModelAndView Success(){
+		ModelAndView result = new ModelAndView();
+		result.setViewName("updateSuccess");
+		return result;
+	}
 
 
 	@RequestMapping(value = "/recruiter", method = RequestMethod.GET)

@@ -26,14 +26,14 @@ public class MySQLVacancies implements VacancyData {
 				
 				while(rs.next()){
 					
-					vacancies.add(new Vacancy(rs.getString(2),rs.getString(3),rs.getInt(4)));
+					vacancies.add(new Vacancy(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4)));
 				}
 				cn.close();
 			}catch(SQLException ex){
-				vacancies.add(new Vacancy(ex.getMessage(), ex.getMessage(), 1));
+				vacancies.add(new Vacancy(0,ex.getMessage(), ex.getMessage(), 1));
 			} catch (ClassNotFoundException ex) {
 				// TODO Auto-generated catch block
-				vacancies.add(new Vacancy("Driver" + ex.getMessage(),null,1));
+				vacancies.add(new Vacancy(0,"Driver" + ex.getMessage(),null,1));
 			}
 
 		return vacancies;

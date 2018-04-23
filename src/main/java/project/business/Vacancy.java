@@ -31,8 +31,9 @@ public class Vacancy {
 	public void setNumOfPositions(int numOfPositions) {
 		NumOfPositions = numOfPositions;
 	}
-	public Vacancy(String role, String practice, int numOfPositions) {
+	public Vacancy(int id,String role, String practice, int numOfPositions) {
 		super();
+		this.id = id;
 		Role = role;
 		Practice = practice;
 		NumOfPositions = numOfPositions;
